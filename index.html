@@ -1,5 +1,5 @@
 <!DOCTYPE html> 
-<html lang="uz" data-theme="dark">
+<html lang="ru" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -145,6 +145,36 @@
             align-items: center;
         }
 
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .hamburger:hover {
+            background: var(--bg-card);
+        }
+
+        .nav-links.open {
+            display: flex !important;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(26, 31, 58, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 1rem;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
         .theme-toggle, .lang-toggle {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -182,6 +212,18 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero::before {
@@ -736,9 +778,9 @@
         /* Mobil qurilmalar uchun moslashuv */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
+            .hamburger { display: block; }
             .nav-links { 
-                gap: 1rem; 
-                display: none; /* Mobil menyu alohida ishlanishi kerak, hozircha yashiramiz */
+                display: none; 
             }
             .nav-container {
                 justify-content: space-between; /* Qayta to'g'irlandi */
@@ -783,6 +825,7 @@
                 <span>📊</span>
                 <span data-translate-key="siteName">BOZOR TAHLIL</span>
             </div>
+            <button class="hamburger" id="hamburger">☰</button>
             <ul class="nav-links" id="main-nav-links">
                 <li><a href="#" class="nav-link active" data-page="home" data-translate-key="home">Bosh sahifa</a></li>
                 <li><a href="#" class="nav-link" data-page="news" data-translate-key="news">Yangiliklar</a></li>
@@ -907,6 +950,123 @@
                         <div class="news-date"><i class="fas fa-calendar-alt"></i> 8 Dekabr, 2025</div>
                         <h3 class="news-title">Sun'iy intellektga investitsiyalar rekord darajaga yetdi</h3>
                         <p class="news-text">Texnologiya sektoridagi eng yirik kompaniyalar o'z sarmoyalarini AI tadqiqotlariga yo'naltirishmoqda.</p>
+                        <a href="#" class="read-more" data-translate-key="readMore">Batafsil o'qish <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);"><i class="fas fa-coins"></i></div>
+                    <div class="news-content">
+                        <div class="news-date"><i class="fas fa-calendar-alt"></i> 7 Dekabr, 2025</div>
+                        <h3 class="news-title">Kriptovalyuta bozorida yangi rekordlar</h3>
+                        <p class="news-text">Bitcoin narxi yangi yuqori cho'qqiga chiqdi, Ethereum ham o'sishda davom etmoqda.</p>
+                        <a href="#" class="read-more" data-translate-key="readMore">Batafsil o'qish <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);"><i class="fas fa-chart-pie"></i></div>
+                    <div class="news-content">
+                        <div class="news-date"><i class="fas fa-calendar-alt"></i> 6 Dekabr, 2025</div>
+                        <h3 class="news-title">Global iqtisodiy o'sish prognozlari yangilandi</h3>
+                        <p class="news-text">Xalqaro valyuta jamg'armasi 2026 yil uchun o'sish taxminlarini ko'tardi.</p>
+                        <a href="#" class="read-more" data-translate-key="readMore">Batafsil o'qish <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);"><i class="fas fa-building"></i></div>
+                    <div class="news-content">
+                        <div class="news-date"><i class="fas fa-calendar-alt"></i> 5 Dekabr, 2025</div>
+                        <h3 class="news-title">Bank sektori yangiliklari</h3>
+                        <p class="news-text">Yangi raqamli bank xizmatlari mijozlar uchun qulayliklar yaratmoqda.</p>
+                        <a href="#" class="read-more" data-translate-key="readMore">Batafsil o'qish <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);"><i class="fas fa-globe"></i></div>
+                    <div class="news-content">
+                        <div class="news-date"><i class="fas fa-calendar-alt"></i> 4 Dekabr, 2025</div>
+                        <h3 class="news-title">Xalqaro savdo kelishuvlari</h3>
+                        <p class="news-text">Yangi savdo shartnomalari global iqtisodiyotga ijobiy ta'sir ko'rsatadi.</p>
+                        <a href="#" class="read-more" data-translate-key="readMore">Batafsil o'qish <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);"><i class="fas fa-leaf"></i></div>
+                    <div class="news-content">
+                        <div class="news-date"><i class="fas fa-calendar-alt"></i> 3 Dekabr, 2025</div>
+                        <h3 class="news-title">Yashil energiya investitsiyalari</h3>
+                        <p class="news-text">Qayta tiklanuvchi energiya loyihalariga sarmoyalar ortib bormoqda.</p>
+                        <a href="#" class="read-more" data-translate-key="readMore">Batafsil o'qish <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);"><i class="fas fa-industry"></i></div>
+                    <div class="news-content">
+                        <div class="news-date"><i class="fas fa-calendar-alt"></i> 2 Dekabr, 2025</div>
+                        <h3 class="news-title">Sanoat ishlab chiqarish o'sishi</h3>
+                        <p class="news-text">Yangi texnologiyalar ishlab chiqarish samaradorligini oshirishga yordam bermoqda.</p>
+                        <a href="#" class="read-more" data-translate-key="readMore">Batafsil o'qish <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);"><i class="fas fa-mobile-alt"></i></div>
+                    <div class="news-content">
+                        <div class="news-date"><i class="fas fa-calendar-alt"></i> 1 Dekabr, 2025</div>
+                        <h3 class="news-title">Mobil texnologiyalar rivoji</h3>
+                        <p class="news-text">5G tarmog'i va yangi qurilmalar iste'molchilarga yangi imkoniyatlar beradi.</p>
+                        <a href="#" class="read-more" data-translate-key="readMore">Batafsil o'qish <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);"><i class="fas fa-shopping-cart"></i></div>
+                    <div class="news-content">
+                        <div class="news-date"><i class="fas fa-calendar-alt"></i> 30 Noyabr, 2025</div>
+                        <h3 class="news-title">Elektron tijorat o'sishi</h3>
+                        <p class="news-text">Onlayn savdo platformalari iste'molchilar uchun qulayroq bo'lib bormoqda.</p>
+                        <a href="#" class="read-more" data-translate-key="readMore">Batafsil o'qish <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #14b8a6 0%, #0f766e 100%);"><i class="fas fa-brain"></i></div>
+                    <div class="news-content">
+                        <div class="news-date"><i class="fas fa-calendar-alt"></i> 29 Noyabr, 2025</div>
+                        <h3 class="news-title">AI va mashina o'rganish</h3>
+                        <p class="news-text">Sun'iy intellekt texnologiyalari turli sohalarda qo'llanilmoqda.</p>
+                        <a href="#" class="read-more" data-translate-key="readMore">Batafsil o'qish <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);"><i class="fas fa-rocket"></i></div>
+                    <div class="news-content">
+                        <div class="news-date"><i class="fas fa-calendar-alt"></i> 28 Noyabr, 2025</div>
+                        <h3 class="news-title">Kosmik sanoat yangiliklari</h3>
+                        <p class="news-text">Xususiy kompaniyalar kosmik tadqiqotlarga katta sarmoyalar kiritmoqda.</p>
+                        <a href="#" class="read-more" data-translate-key="readMore">Batafsil o'qish <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);"><i class="fas fa-heartbeat"></i></div>
+                    <div class="news-content">
+                        <div class="news-date"><i class="fas fa-calendar-alt"></i> 27 Noyabr, 2025</div>
+                        <h3 class="news-title">Tibbiyot texnologiyalari</h3>
+                        <p class="news-text">Yangi tibbiy qurilmalar va dori vositalari sog'liqni saqlashni yaxshilamoqda.</p>
+                        <a href="#" class="read-more" data-translate-key="readMore">Batafsil o'qish <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);"><i class="fas fa-water"></i></div>
+                    <div class="news-content">
+                        <div class="news-date"><i class="fas fa-calendar-alt"></i> 26 Noyabr, 2025</div>
+                        <h3 class="news-title">Muqobil energiya manbalari</h3>
+                        <p class="news-text">Quyosh va shamol energiyasi an'anaviy energiyaga alternativa bo'lib bormoqda.</p>
+                        <a href="#" class="read-more" data-translate-key="readMore">Batafsil o'qish <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);"><i class="fas fa-car"></i></div>
+                    <div class="news-content">
+                        <div class="news-date"><i class="fas fa-calendar-alt"></i> 25 Noyabr, 2025</div>
+                        <h3 class="news-title">Avtomobil sanoati innovatsiyalari</h3>
+                        <p class="news-text">Elektromobillar va avtonom transport vositalari kelajakni belgilaydi.</p>
                         <a href="#" class="read-more" data-translate-key="readMore">Batafsil o'qish <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -1038,6 +1198,110 @@
                         <ul data-translate-key="cryptoOutlookPoints">
                             <li><strong>Qo'llab-quvvatlash:</strong> BTC uchun $68,000, ETH uchun $3,700.</li>
                             <li><strong>Qarshilik:</strong> BTC uchun $75,000.</li>
+                        </ul>
+                    </div>
+                    <div class="analysis-item">
+                        <h3>Global Iqtisodiy Prognoz</h3>
+                        <p>Xalqaro valyuta jamg'armasi 2026 yil uchun o'sish taxminlarini 3.2% ga baholamoqda.</p>
+                        <ul>
+                            <li><strong>Asosiy omillar:</strong> Raqamli transformatsiya va yashil energiya.</li>
+                            <li><strong>Xavflar:</strong> Geosiyosiy keskinliklar va inflyatsiya.</li>
+                        </ul>
+                    </div>
+                    <div class="analysis-item">
+                        <h3>Valyuta Bozorlari Tahlili</h3>
+                        <p>EUR/USD juftligi 1.08 darajasida barqarorlashgan, ammo Brexit yangiliklari ta'sir ko'rsatishi mumkin.</p>
+                        <ul>
+                            <li><strong>Prognoz:</strong> 1.05-1.12 oralig'ida harakat.</li>
+                            <li><strong>Tavsiyalar:</strong> Uzun muddatli investitsiyalar uchun ehtiyotkorlik.</li>
+                        </ul>
+                    </div>
+                    <div class="analysis-item">
+                        <h3>Kommoditi Bozorlari</h3>
+                        <p>Neft narxlari OPEC+ qarorlariga bog'liq, oltin esa xavfsizlik aktiv sifatida o'smoqda.</p>
+                        <ul>
+                            <li><strong>Neft:</strong> $75-85/barrel prognozi.</li>
+                            <li><strong>Oltin:</strong> $2,000/unsiya qarshilik.</li>
+                        </ul>
+                    </div>
+                    <div class="analysis-item">
+                        <h3>Teknologiya Sektori</h3>
+                        <p>FAANG kompaniyalari yangi texnologiyalar bilan o'sishda davom etmoqda.</p>
+                        <ul>
+                            <li><strong>Trendlar:</strong> AI, bulut hisoblash, 5G.</li>
+                            <li><strong>Risklar:</strong> Regulyatorlik o'zgarishlar.</li>
+                        </ul>
+                    </div>
+                    <div class="analysis-item">
+                        <h3>Emerging Markets</h3>
+                        <p>Rivojlanayotgan bozorlar iqtisodiy o'sish bilan jozibador, ammo valyuta risklari mavjud.</p>
+                        <ul>
+                            <li><strong>Imkoniyatlar:</strong> Yuqori daromad va diversifikatsiya.</li>
+                            <li><strong>Ehtiyotkorlik:</strong> Geosiyosiy risklar.</li>
+                        </ul>
+                    </div>
+                    <div class="analysis-item">
+                        <h3>Inflatsiya va Foiz Stavkalari</h3>
+                        <p>Markaziy banklar inflyatsiyani nazorat qilish uchun foiz stavkalarini sozlamoqda.</p>
+                        <ul>
+                            <li><strong>FED:</strong> 4.5-5.0% oralig'ida.</li>
+                            <li><strong>ECB:</strong> 3.0-3.5% prognozi.</li>
+                        </ul>
+                    </div>
+                    <div class="analysis-item">
+                        <h3>Savdo Urushlari Ta'siri</h3>
+                        <p>Global savdo kelishuvlari iqtisodiy o'sishga ta'sir ko'rsatadi.</p>
+                        <ul>
+                            <li><strong>Ijobiy:</strong> Yangi bozorlar ochilishi.</li>
+                            <li><strong>Salbiy:</strong> Narxlar oshishi.</li>
+                        </ul>
+                    </div>
+                    <div class="analysis-item">
+                        <h3>Yashil Energiya Investitsiyalari</h3>
+                        <p>Qayta tiklanuvchi energiya sektori katta o'sish potentsialiga ega.</p>
+                        <ul>
+                            <li><strong>Trend:</strong> Quyosh va shamol energiyasi.</li>
+                            <li><strong>Sarmoyalar:</strong> Trillion dollarlar darajasida.</li>
+                        </ul>
+                    </div>
+                    <div class="analysis-item">
+                        <h3>Kripto Regulyatsiyasi</h3>
+                        <p>Hukumatlar kriptovalyutalarni tartibga solish uchun yangi qonunlarni qabul qilmoqda.</p>
+                        <ul>
+                            <li><strong>AQSh:</strong> Yangi qoidalar kutilmoqda.</li>
+                            <li><strong>Yevropa:</strong> MiCA direktivasi.</li>
+                        </ul>
+                    </div>
+                    <div class="analysis-item">
+                        <h3>Real Estate Bozorlari</h3>
+                        <p>Ko'chmas mulk narxlari o'sishda, ammo ipoteka stavkalari ta'sir ko'rsatadi.</p>
+                        <ul>
+                            <li><strong>Trend:</strong> Shahar markazlarida o'sish.</li>
+                            <li><strong>Risk:</strong> Iqtisodiy pasayish.</li>
+                        </ul>
+                    </div>
+                    <div class="analysis-item">
+                        <h3>Sog'liqni Saqlash Sektori</h3>
+                        <p>Pandemiyadan keyin tibbiyot texnologiyalari tez rivojlanmoqda.</p>
+                        <ul>
+                            <li><strong>Innovatsiyalar:</strong> Gen terapiyasi, AI tibbiyotda.</li>
+                            <li><strong>Sarmoyalar:</strong> Yuqori darajada.</li>
+                        </ul>
+                    </div>
+                    <div class="analysis-item">
+                        <h3>Ta'lim Texnologiyalari</h3>
+                        <p>Onlayn ta'lim platformalari an'anaviy ta'limga alternativa bo'lib bormoqda.</p>
+                        <ul>
+                            <li><strong>O'sish:</strong> Pandemiyadan keyin 200% dan ortiq.</li>
+                            <li><strong>Kelajak:</strong> VR/AR integratsiyasi.</li>
+                        </ul>
+                    </div>
+                    <div class="analysis-item">
+                        <h3>Avtomobil Sanoati Transformatsiyasi</h3>
+                        <p>Elektromobillar va avtonom transport an'anaviy avtomobillarga o'rnib bormoqda.</p>
+                        <ul>
+                            <li><strong>Trend:</strong> EV bozorining o'sishi.</li>
+                            <li><strong>Kompaniiyalar:</strong> Tesla, BYD liderlar.</li>
                         </ul>
                     </div>
                 </div>
@@ -1179,16 +1443,65 @@
                 footerPrivacy: "Privacy Policy",
                 footerDisclaimer: "Disclaimer",
                 copyrightText: "© 2025 Global Market Analysis. All rights reserved."
+            },
+            ru: {
+                siteName: "Глобальный Анализ Рынка",
+                home: "Главная",
+                news: "Новости",
+                markets: "Рынки",
+                crypto: "Крипто",
+                analytics: "Анализ",
+                heroTitle: "Глобальный Финансовый Рынок",
+                heroSubtitle: "Данные рынка в реальном времени, курсы валют и профессиональный анализ",
+                liveData: "ЖИВЫЕ ДАННЫЕ",
+                mainIndexes: "Основные Индексы",
+                sp500: "S&P 500",
+                nasdaq: "NASDAQ",
+                gold: "Золото",
+                oil: "Нефть",
+                backHome: "← Вернуться на главную",
+                latestNews: "🔥 Последние Новости Рынка",
+                readMore: "Читать далее",
+                globalMarkets: "🌎 Глобальные Финансовые Рынки",
+                marketName: "Рынок",
+                index: "Индекс",
+                value: "Значение",
+                change: "Изменение (24ч)",
+                cryptoMarket: "💰 Рынок Криптовалют",
+                               expertAnalysis: "🧠 Экспертный Анализ и Прогнозы",
+                usdAnalysisTitle: "Анализ USD/UZS",
+                usdAnalysisText: "Доллар США сохраняет стабильный рост по отношению к суму. Интервенции центрального банка ограничивают волатильность.",
+                usdAnalysisPoints: [
+                    "Прогноз: Ожидается стабилизация в диапазоне 12,800 - 12,950 сум.",
+                    "Риски: Увеличение глобальной геополитической напряженности."
+                ],
+                cryptoOutlookTitle: "Будущий Обзор Крипторынков",
+                cryptoOutlookText: "Недавний рост Bitcoin положительно повлиял на рынок, но осторожность остается в альткоинах.",
+                cryptoOutlookPoints: [
+                    "Поддержка: $68,000 для BTC, $3,700 для ETH.",
+                    "Сопротивление: $75,000 для BTC."
+                ],
+                footerQuickLinks: "Быстрые Ссылки",
+                footerContact: "Контакты",
+                footerEmail: "Email: info@globalmarket.com",
+                footerPhone: "Телефон: +998 71 123 45 67",
+                footerLegal: "Юридическая Информация",
+                footerTerms: "Условия Использования",
+                footerPrivacy: "Политика Конфиденциальности",
+                footerDisclaimer: "Отказ от Ответственности",
+                copyrightText: "© 2025 Глобальный Анализ Рынка. Все права защищены."
             }
         };
 
-        let currentLang = document.documentElement.lang;
+        let currentLang = 'ru';
 
         document.addEventListener('DOMContentLoaded', () => {
             const navLinks = document.querySelectorAll('.nav-link');
             const pageContents = document.querySelectorAll('.page-content');
             const themeToggle = document.getElementById('themeToggle');
             const langToggle = document.getElementById('langToggle');
+            const hamburger = document.getElementById('hamburger');
+            const navLinksContainer = document.getElementById('main-nav-links');
 
             // --- 1. SAHIFALARNI BOSHQARISH FUNKSIYASI (ASOSIY MUAMMO YECHIMI) ---
             function switchPage(pageId) {
@@ -1234,6 +1547,11 @@
                 themeToggle.textContent = newTheme === 'dark' ? '🌙' : '☀️';
             });
 
+            // --- 4. HAMBURGER MENU ---
+            hamburger.addEventListener('click', () => {
+                navLinksContainer.classList.toggle('open');
+            });
+
             // --- 3. TILNI ALMASHTIRISH (Internationalization - i18n) ---
             function updateTranslations(lang) {
                 const dictionary = translations[lang];
@@ -1262,7 +1580,7 @@
             }
 
             langToggle.addEventListener('click', () => {
-                currentLang = currentLang === 'uz' ? 'en' : 'uz';
+                currentLang = currentLang === 'uz' ? 'en' : currentLang === 'en' ? 'ru' : 'uz';
                 updateTranslations(currentLang);
             });
 
