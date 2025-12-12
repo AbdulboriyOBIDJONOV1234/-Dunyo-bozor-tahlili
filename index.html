@@ -1,0 +1,1275 @@
+<!DOCTYPE html> 
+<html lang="uz" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate-key="siteName">Global Bozor Tahlili</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style id="main-styles">
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        /* O'zgaruvchilar (Variables) */
+        :root {
+            --bg-primary: #0a0e27;
+            --bg-secondary: #141937;
+            --bg-card: #1a1f3a;
+            --text-primary: #ffffff;
+            --text-secondary: #8b92b2;
+            --accent-primary: #6366f1;
+            --accent-secondary: #818cf8;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --border-color: #2d3356;
+            --glow: rgba(99, 102, 241, 0.5);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --accent-primary: #6366f1;
+            --accent-secondary: #818cf8;
+            --border-color: #e2e8f0;
+            --glow: rgba(99, 102, 241, 0.2);
+        }
+
+        /* Umumiy uslublar */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: all 0.5s ease;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            pointer-events: none;
+            background-image:
+                radial-gradient(circle at 20% 50%, var(--accent-primary) 1px, transparent 1px),
+                radial-gradient(circle at 80% 80%, var(--accent-secondary) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+        }
+        
+        /* Navbar */
+        .navbar {
+            background: rgba(26, 31, 58, 0.9);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.2rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        [data-theme="light"] .navbar {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            filter: drop-shadow(0 0 10px var(--glow));
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--text-primary);
+        }
+
+        .nav-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .theme-toggle, .lang-toggle {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.7rem 1.3rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .theme-toggle:hover, .lang-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px var(--glow);
+            border-color: var(--accent-primary);
+        }
+
+        /* Umumiy Konteyner */
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero Qismi */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            color: white;
+            padding: 5rem 3rem;
+            border-radius: 24px;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin-top: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .live-dot {
+            width: 10px;
+            height: 10px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Marquee qismi (Valyuta yugurtirgichi) */
+        .currency-marquee {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 3rem;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .marquee-content {
+            display: flex;
+            animation: scroll 30s linear infinite;
+            gap: 3rem;
+            width: fit-content; /* Marquee uchun kerak */
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .currency-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            white-space: nowrap;
+            min-width: 200px;
+        }
+
+        .currency-flag {
+            font-size: 2rem;
+        }
+
+        .currency-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .currency-pair {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .currency-rate {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Statistika kartalari */
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.3);
+            border-color: var(--accent-primary);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .stat-title {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            opacity: 0.5;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-change {
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+        }
+
+        .positive { color: var(--success); }
+        .negative { color: var(--danger); }
+
+        .mini-chart {
+            height: 60px;
+            margin-top: 1rem;
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: linear-gradient(to top, var(--accent-primary), var(--accent-secondary));
+            border-radius: 4px 4px 0 0;
+            opacity: 0.6;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover .chart-bar {
+            opacity: 1;
+        }
+
+        /* Bo'lim Sarlavhasi */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Bosh sahifaga qaytish tugmasi */
+        .back-to-home {
+            background: var(--accent-primary);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+            text-decoration: none;
+        }
+        
+        .back-to-home:hover {
+            background: var(--accent-secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.6);
+        }
+
+        /* Yangiliklar sahifasi uslublari */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .news-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 70px rgba(99, 102, 241, 0.4);
+            border-color: var(--accent-primary);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .news-content {
+            padding: 2rem;
+            flex-grow: 1;
+        }
+
+        .news-date {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .news-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .news-text {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .read-more {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .read-more:hover {
+            gap: 1rem;
+        }
+
+        /* Bozorlar va Tahlil sahifasi uslublari */
+        .markets-table, .analysis-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            margin-bottom: 3rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+        }
+
+        th {
+            padding: 1.5rem;
+            text-align: left;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+        }
+
+        td {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        tbody tr {
+            transition: all 0.3s;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: var(--bg-secondary);
+            transform: scale(1.01);
+        }
+
+        .market-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .market-name span:first-child {
+            font-size: 1.5rem;
+        }
+
+        /* Kripto sahifasi uslublari */
+        .crypto-section {
+            margin-top: 1rem;
+        }
+
+        .crypto-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .crypto-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+
+        .crypto-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(99, 102, 241, 0.3);
+            border-color: var(--accent-primary);
+        }
+
+        .crypto-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .crypto-icon {
+            font-size: 2.5rem;
+        }
+
+        .crypto-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .crypto-symbol {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .crypto-price {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--success), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .crypto-change {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .analysis-container {
+            padding: 2rem;
+            /* Tahlil kartalari uchun grid */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+        
+        .analysis-item {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .analysis-item:hover {
+            box-shadow: 0 10px 30px var(--glow);
+            transform: translateY(-5px);
+            border-color: var(--accent-secondary);
+        }
+
+        
+        .analysis-item h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--accent-primary);
+        }
+        
+        .analysis-item p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        .analysis-item ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 1.5rem;
+        }
+        
+        .analysis-item ul li {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.8rem;
+            border-left: 5px solid var(--accent-primary);
+            font-size: 0.9em;
+        }
+        
+        .analysis-item ul li strong {
+            color: var(--text-primary);
+        }
+        /* Footer */
+        .main-footer {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 0;
+            margin-top: 4rem;
+            color: var(--text-secondary);
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        .footer-col h4 {
+            font-size: 1.2rem;
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-primary);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+        .footer-col ul {
+            list-style: none;
+        }
+        .footer-col a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .footer-col a:hover {
+            color: var(--text-primary);
+        }
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .social-links a {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+        }
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Yordamchi sinflar */
+        .hidden {
+            display: none !important; /* !important qo'shildi */
+        }
+
+        /* Mobil qurilmalar uchun moslashuv */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { 
+                gap: 1rem; 
+                display: none; /* Mobil menyu alohida ishlanishi kerak, hozircha yashiramiz */
+            }
+            .nav-container {
+                justify-content: space-between; /* Qayta to'g'irlandi */
+            }
+            .nav-controls {
+                position: static;
+                gap: 0.5rem;
+            }
+            .stats-grid, .news-grid, .crypto-grid {
+                grid-template-columns: 1fr;
+            }
+            .analysis-container {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Jadvalni mobilga moslash */
+            .markets-table {
+                overflow-x: auto;
+            }
+
+            .markets-table table {
+                 /* mobil holatda jadval o'lchami o'zgarmasligi uchun minimal kenglik berildi */
+                min-width: 600px; 
+            }
+            
+            .markets-table td, .markets-table th {
+                padding: 1rem;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span>📊</span>
+                <span data-translate-key="siteName">BOZOR TAHLIL</span>
+            </div>
+            <ul class="nav-links" id="main-nav-links">
+                <li><a href="#" class="nav-link active" data-page="home" data-translate-key="home">Bosh sahifa</a></li>
+                <li><a href="#" class="nav-link" data-page="news" data-translate-key="news">Yangiliklar</a></li>
+                <li><a href="#" class="nav-link" data-page="markets" data-translate-key="markets">Bozorlar</a></li>
+                <li><a href="#" class="nav-link" data-page="crypto" data-translate-key="crypto">Kripto</a></li>
+                <li><a href="#" class="nav-link" data-page="analytics" data-translate-key="analytics">Tahlil</a></li>
+            </ul>
+            <div class="nav-controls">
+                <button class="lang-toggle" id="langToggle" data-current-lang="uz">UZ</button>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        <div id="homePage" class="page-content">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1 data-translate-key="heroTitle">Jahon Moliya Bozori</h1>
+                    <p data-translate-key="heroSubtitle">Real vaqt rejimida bozor ma'lumotlari, valyuta kurslari va professional tahlillar</p>
+                    <div class="live-indicator">
+                        <div class="live-dot"></div>
+                        <span data-translate-key="liveData">JONLI MA'LUMOTLAR</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="currency-marquee">
+                <div class="marquee-content" id="currencyMarquee">
+                    <div class="currency-item"><span class="currency-flag">🇺🇸</span><div class="currency-info"><span class="currency-pair">USD/UZS</span><span class="currency-rate positive">12,750.00 so'm</span></div></div>
+                    <div class="currency-item"><span class="currency-flag">🇪🇺</span><div class="currency-info"><span class="currency-pair">EUR/UZS</span><span class="currency-rate positive">13,485.50 so'm</span></div></div>
+                    <div class="currency-item"><span class="currency-flag">🇷🇺</span><div class="currency-info"><span class="currency-pair">RUB/UZS</span><span class="currency-rate negative">125.80 so'm</span></div></div>
+                    <div class="currency-item"><span class="currency-flag">🇬🇧</span><div class="currency-info"><span class="currency-pair">GBP/UZS</span><span class="currency-rate positive">16,125.00 so'm</span></div></div>
+                    <div class="currency-item"><span class="currency-flag">🇨🇳</span><div class="currency-info"><span class="currency-pair">CNY/UZS</span><span class="currency-rate positive">1,756.30 so'm</span></div></div>
+                    <div class="currency-item"><span class="currency-flag">🇯🇵</span><div class="currency-info"><span class="currency-pair">JPY/UZS</span><span class="currency-rate negative">85.40 so'm</span></div></div>
+                     <div class="currency-item"><span class="currency-flag">🇺🇸</span><div class="currency-info"><span class="currency-pair">USD/UZS</span><span class="currency-rate positive">12,750.00 so'm</span></div></div>
+                    <div class="currency-item"><span class="currency-flag">🇪🇺</span><div class="currency-info"><span class="currency-pair">EUR/UZS</span><span class="currency-rate positive">13,485.50 so'm</span></div></div>
+                    <div class="currency-item"><span class="currency-flag">🇷🇺</span><div class="currency-info"><span class="currency-pair">RUB/UZS</span><span class="currency-rate negative">125.80 so'm</span></div></div>
+                    <div class="currency-item"><span class="currency-flag">🇬🇧</span><div class="currency-info"><span class="currency-pair">GBP/UZS</span><span class="currency-rate positive">16,125.00 so'm</span></div></div>
+                    <div class="currency-item"><span class="currency-flag">🇨🇳</span><div class="currency-info"><span class="currency-pair">CNY/UZS</span><span class="currency-rate positive">1,756.30 so'm</span></div></div>
+                    <div class="currency-item"><span class="currency-flag">🇯🇵</span><div class="currency-info"><span class="currency-pair">JPY/UZS</span><span class="currency-rate negative">85.40 so'm</span></div></div>
+                </div>
+            </div>
+
+            <h2 class="section-title" data-translate-key="mainIndexes">Asosiy Indekslar</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-title" data-translate-key="sp500">S&P 500</div>
+                        <div class="stat-icon"><i class="fas fa-chart-line" style="color: #6366f1;"></i></div>
+                    </div>
+                    <div class="stat-value">4,783.45</div>
+                    <div class="stat-change positive">▲ +1.24% (+58.45)</div>
+                    <div class="mini-chart">
+                        <div class="chart-bar" style="height: 40%"></div><div class="chart-bar" style="height: 60%"></div><div class="chart-bar" style="height: 45%"></div><div class="chart-bar" style="height: 70%"></div><div class="chart-bar" style="height: 55%"></div><div class="chart-bar" style="height: 85%"></div><div class="chart-bar" style="height: 75%"></div><div class="chart-bar" style="height: 90%"></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-title" data-translate-key="nasdaq">NASDAQ</div>
+                        <div class="stat-icon"><i class="fas fa-laptop-code" style="color: #6366f1;"></i></div>
+                    </div>
+                    <div class="stat-value">15,011.35</div>
+                    <div class="stat-change positive">▲ +0.87% (+129.23)</div>
+                    <div class="mini-chart">
+                        <div class="chart-bar" style="height: 50%"></div><div class="chart-bar" style="height: 65%"></div><div class="chart-bar" style="height: 55%"></div><div class="chart-bar" style="height: 75%"></div><div class="chart-bar" style="height: 70%"></div><div class="chart-bar" style="height: 80%"></div><div class="chart-bar" style="height: 85%"></div><div class="chart-bar" style="height: 95%"></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-title" data-translate-key="gold">Oltin</div>
+                        <div class="stat-icon"><i class="fas fa-coins" style="color: #f59e0b;"></i></div>
+                    </div>
+                    <div class="stat-value">$2,063</div>
+                    <div class="stat-change negative">▼ -0.45% (-$9.30)</div>
+                    <div class="mini-chart">
+                        <div class="chart-bar" style="height: 85%"></div><div class="chart-bar" style="height: 90%"></div><div class="chart-bar" style="height: 80%"></div><div class="chart-bar" style="height: 75%"></div><div class="chart-bar" style="height: 70%"></div><div class="chart-bar" style="height: 65%"></div><div class="chart-bar" style="height: 60%"></div><div class="chart-bar" style="height: 55%"></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-title" data-translate-key="oil">Neft</div>
+                        <div class="stat-icon"><i class="fas fa-oil-can" style="color: #ef4444;"></i></div>
+                    </div>
+                    <div class="stat-value">$74.28</div>
+                    <div class="stat-change positive">▲ +2.13% (+$1.55)</div>
+                    <div class="mini-chart">
+                        <div class="chart-bar" style="height: 45%"></div><div class="chart-bar" style="height: 50%"></div><div class="chart-bar" style="height: 55%"></div><div class="chart-bar" style="height: 65%"></div><div class="chart-bar" style="height: 70%"></div><div class="chart-bar" style="height: 80%"></div><div class="chart-bar" style="height: 85%"></div><div class="chart-bar" style="height: 92%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="newsPage" class="page-content hidden">
+            <a href="#" class="back-to-home" data-page="home" data-translate-key="backHome">
+                <i class="fas fa-arrow-left"></i> Bosh sahifaga qaytish
+            </a>
+            <h2 class="section-title" data-translate-key="latestNews">🔥 Eng So'nggi Bozor Yangiliklari</h2>
+            <div class="news-grid" id="newsGrid">
+                <div class="news-card">
+                    <div class="news-image"><i class="fas fa-chart-area"></i></div>
+                    <div class="news-content">
+                        <div class="news-date"><i class="fas fa-calendar-alt"></i> 10 Dekabr, 2025</div>
+                        <h3 class="news-title">Markaziy Bank foiz stavkalarini o'zgartirmadi: Kutilayotgan ta'sirlar</h3>
+                        <p class="news-text">Tahlilchilar bu qarorning kelgusi chorakda inflyatsiyaga va milliy valyuta kursiga qanday ta'sir qilishini baholaydilar.</p>
+                        <a href="#" class="read-more" data-translate-key="readMore">Batafsil o'qish <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);"><i class="fas fa-seedling"></i></div>
+                    <div class="news-content">
+                        <div class="news-date"><i class="fas fa-calendar-alt"></i> 9 Dekabr, 2025</div>
+                        <h3 class="news-title">Oziq-ovqat narxlari keskin o'sishda davom etmoqda: Sabab va Oqibat</h3>
+                        <p class="news-text">Global ta'minot zanjiridagi uzilishlar va energetika narxlari qishloq xo'jaligi mahsulotlari narxlariga bosim o'tkazmoqda.</p>
+                        <a href="#" class="read-more" data-translate-key="readMore">Batafsil o'qish <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image" style="background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);"><i class="fas fa-robot"></i></div>
+                    <div class="news-content">
+                        <div class="news-date"><i class="fas fa-calendar-alt"></i> 8 Dekabr, 2025</div>
+                        <h3 class="news-title">Sun'iy intellektga investitsiyalar rekord darajaga yetdi</h3>
+                        <p class="news-text">Texnologiya sektoridagi eng yirik kompaniyalar o'z sarmoyalarini AI tadqiqotlariga yo'naltirishmoqda.</p>
+                        <a href="#" class="read-more" data-translate-key="readMore">Batafsil o'qish <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="marketsPage" class="page-content hidden">
+            <a href="#" class="back-to-home" data-page="home" data-translate-key="backHome">
+                <i class="fas fa-arrow-left"></i> Bosh sahifaga qaytish
+            </a>
+            <h2 class="section-title" data-translate-key="globalMarkets">🌎 Global Moliyaviy Bozorlar</h2>
+            <div class="markets-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th data-translate-key="marketName">Bozor</th>
+                            <th data-translate-key="index">Indeks</th>
+                            <th data-translate-key="value">Qiymat</th>
+                            <th data-translate-key="change">O'zgarish (24h)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Bozor"><span class="market-name"><span style="color:#6366f1;"><i class="fas fa-chart-bar"></i></span> NASDAQ 100</span></td>
+                            <td data-label="Indeks">NDX</td>
+                            <td data-label="Qiymat">16,780.12</td>
+                            <td data-label="O'zgarish" class="positive">+0.95%</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Bozor"><span class="market-name"><span style="color:#ef4444;"><i class="fas fa-chart-line"></i></span> DAX (Germaniya)</span></td>
+                            <td data-label="Indeks">DAX</td>
+                            <td data-label="Qiymat">16,452.34</td>
+                            <td data-label="O'zgarish" class="negative">-0.21%</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Bozor"><span class="market-name"><span style="color:#10b981;"><i class="fas fa-chart-area"></i></span> Nikkei 225 (Yaponiya)</span></td>
+                            <td data-label="Indeks">N225</td>
+                            <td data-label="Qiymat">33,021.05</td>
+                            <td data-label="O'zgarish" class="positive">+1.58%</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Bozor"><span class="market-name"><span style="color:#f59e0b;"><i class="fas fa-globe"></i></span> Shanghai Composite (Xitoy)</span></td>
+                            <td data-label="Indeks">SHCOMP</td>
+                            <td data-label="Qiymat">2,972.10</td>
+                            <td data-label="O'zgarish" class="negative">-0.88%</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Bozor"><span class="market-name"><span style="color:#3b82f6;"><i class="fas fa-chart-pie"></i></span> Bitcoin (BTC)</span></td>
+                            <td data-label="Indeks">BTC/USD</td>
+                            <td data-label="Qiymat">$72,450.00</td>
+                            <td data-label="O'zgarish" class="positive">+3.12%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="cryptoPage" class="page-content hidden">
+            <a href="#" class="back-to-home" data-page="home" data-translate-key="backHome">
+                <i class="fas fa-arrow-left"></i> Bosh sahifaga qaytish
+            </a>
+            <h2 class="section-title" data-translate-key="cryptoMarket">💰 Kriptovalyuta Bozori</h2>
+            <div class="crypto-grid">
+                <div class="crypto-card">
+                    <div class="crypto-header">
+                        <div class="crypto-icon" style="color: #f7931a;"><i class="fab fa-btc"></i></div>
+                        <div>
+                            <div class="crypto-name">Bitcoin</div>
+                            <div class="crypto-symbol">BTC</div>
+                        </div>
+                    </div>
+                    <div class="crypto-price">$72,450.00</div>
+                    <div class="crypto-change positive">▲ +3.12% (24h)</div>
+                </div>
+                <div class="crypto-card">
+                    <div class="crypto-header">
+                        <div class="crypto-icon" style="color: #627eea;"><i class="fab fa-ethereum"></i></div>
+                        <div>
+                            <div class="crypto-name">Ethereum</div>
+                            <div class="crypto-symbol">ETH</div>
+                        </div>
+                    </div>
+                    <div class="crypto-price">$3,980.50</div>
+                    <div class="crypto-change positive">▲ +2.50% (24h)</div>
+                </div>
+                <div class="crypto-card">
+                    <div class="crypto-header">
+                        <div class="crypto-icon" style="color: #3f3f3f;"><i class="fas fa-money-bill-wave"></i></div>
+                        <div>
+                            <div class="crypto-name">Tether USD</div>
+                            <div class="crypto-symbol">USDT</div>
+                        </div>
+                    </div>
+                    <div class="crypto-price">$1.00</div>
+                    <div class="crypto-change negative">▼ -0.01% (24h)</div>
+                </div>
+                <div class="crypto-card">
+                    <div class="crypto-header">
+                        <div class="crypto-icon" style="color: #00bfff;"><i class="fab fa-docker"></i></div>
+                        <div>
+                            <div class="crypto-name">Dogecoin</div>
+                            <div class="crypto-symbol">DOGE</div>
+                        </div>
+                    </div>
+                    <div class="crypto-price">$0.1872</div>
+                    <div class="crypto-change positive">▲ +5.88% (24h)</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="analyticsPage" class="page-content hidden">
+            <a href="#" class="back-to-home" data-page="home" data-translate-key="backHome">
+                <i class="fas fa-arrow-left"></i> Bosh sahifaga qaytish
+            </a>
+            <h2 class="section-title" data-translate-key="expertAnalysis">🧠 Ekspert Tahlili va Prognozlari</h2>
+            <div class="analysis-card">
+                <div class="analysis-container">
+                    <div class="analysis-item">
+                        <h3 data-translate-key="usdAnalysisTitle">USD/UZS bo'yicha tahlil</h3>
+                        <p data-translate-key="usdAnalysisText">AQSh dollari so'mga nisbatan barqaror o'sish tendentsiyasini saqlab qolmoqda. Markaziy bank intervensiyalari o'zgaruvchanlikni cheklamoqda.</p>
+                        <ul data-translate-key="usdAnalysisPoints">
+                            <li><strong>Prognoz:</strong> 12,800 - 12,950 so'm oralig'ida barqarorlashuv kutilmoqda.</li>
+                            <li><strong>Xavflar:</strong> Global geosiyosiy keskinliklarning oshishi.</li>
+                        </ul>
+                    </div>
+                    <div class="analysis-item">
+                        <h3 data-translate-key="cryptoOutlookTitle">Kripto Bozorlarining Keyingi Istiqboli</h3>
+                        <p data-translate-key="cryptoOutlookText">Bitcoinning so'nggi ko'tarilishi bozorga ijobiy ta'sir ko'rsatdi, ammo altkoinlarda hali ham ehtiyotkorlik kuzatilmoqda.</p>
+                        <ul data-translate-key="cryptoOutlookPoints">
+                            <li><strong>Qo'llab-quvvatlash:</strong> BTC uchun $68,000, ETH uchun $3,700.</li>
+                            <li><strong>Qarshilik:</strong> BTC uchun $75,000.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4><span data-translate-key="footerQuickLinks">Tezkor Havolalar</span></h4>
+                    <ul>
+                        <li><a href="#" data-page="home" class="footer-link" data-translate-key="home">Bosh sahifa</a></li>
+                        <li><a href="#" data-page="news" class="footer-link" data-translate-key="news">Yangiliklar</a></li>
+                        <li><a href="#" data-page="markets" class="footer-link" data-translate-key="markets">Bozorlar</a></li>
+                        <li><a href="#" data-page="analytics" class="footer-link" data-translate-key="analytics">Tahlil</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4><span data-translate-key="footerContact">Bog'lanish</span></h4>
+                    <p data-translate-key="footerEmail">Email: info@globalbozor.uz</p>
+                    <p data-translate-key="footerPhone">Telefon: +998 71 123 45 67</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-telegram-plane"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4><span data-translate-key="footerLegal">Huquqiy Ma'lumot</span></h4>
+                    <ul>
+                        <li><a href="#" data-translate-key="footerTerms">Foydalanish shartlari</a></li>
+                        <li><a href="#" data-translate-key="footerPrivacy">Maxfiylik siyosati</a></li>
+                        <li><a href="#" data-translate-key="footerDisclaimer">Ogohlantirish</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p data-translate-key="copyrightText">&copy; 2025 Global Bozor Tahlili. Barcha huquqlar himoyalangan.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Tarjimalar ma'lumotlar bazasi
+        const translations = {
+            uz: {
+                siteName: "Global Bozor Tahlili",
+                home: "Bosh sahifa",
+                news: "Yangiliklar",
+                markets: "Bozorlar",
+                crypto: "Kripto",
+                analytics: "Tahlil",
+                heroTitle: "Jahon Moliya Bozori",
+                heroSubtitle: "Real vaqt rejimida bozor ma'lumotlari, valyuta kurslari va professional tahlillar",
+                liveData: "JONLI MA'LUMOTLAR",
+                mainIndexes: "Asosiy Indekslar",
+                sp500: "S&P 500",
+                nasdaq: "NASDAQ",
+                gold: "Oltin",
+                oil: "Neft",
+                backHome: "← Bosh sahifaga qaytish",
+                latestNews: "🔥 Eng So'nggi Bozor Yangiliklari",
+                readMore: "Batafsil o'qish",
+                globalMarkets: "🌎 Global Moliyaviy Bozorlar",
+                marketName: "Bozor",
+                index: "Indeks",
+                value: "Qiymat",
+                change: "O'zgarish (24h)",
+                cryptoMarket: "💰 Kriptovalyuta Bozori",
+                expertAnalysis: "🧠 Ekspert Tahlili va Prognozlari",
+                usdAnalysisTitle: "USD/UZS bo'yicha tahlil",
+                usdAnalysisText: "AQSh dollari so'mga nisbatan barqaror o'sish tendentsiyasini saqlab qolmoqda. Markaziy bank intervensiyalari o'zgaruvchanlikni cheklamoqda.",
+                usdAnalysisPoints: [
+                    "Prognoz: 12,800 - 12,950 so'm oralig'ida barqarorlashuv kutilmoqda.",
+                    "Xavflar: Global geosiyosiy keskinliklarning oshishi."
+                ],
+                cryptoOutlookTitle: "Kripto Bozorlarining Keyingi Istiqboli",
+                cryptoOutlookText: "Bitcoinning so'nggi ko'tarilishi bozorga ijobiy ta'sir ko'rsatdi, ammo altkoinlarda hali ham ehtiyotkorlik kuzatilmoqda.",
+                cryptoOutlookPoints: [
+                    "Qo'llab-quvvatlash: BTC uchun $68,000, ETH uchun $3,700.",
+                    "Qarshilik: BTC uchun $75,000."
+                ],
+                footerQuickLinks: "Tezkor Havolalar",
+                footerContact: "Bog'lanish",
+                footerEmail: "Email: info@globalbozor.uz",
+                footerPhone: "Telefon: +998 71 123 45 67",
+                footerLegal: "Huquqiy Ma'lumot",
+                footerTerms: "Foydalanish shartlari",
+                footerPrivacy: "Maxfiylik siyosati",
+                footerDisclaimer: "Ogohlantirish",
+                copyrightText: "© 2025 Global Bozor Tahlili. Barcha huquqlar himoyalangan."
+
+            },
+            en: {
+                siteName: "Global Market Analysis",
+                home: "Home",
+                news: "News",
+                markets: "Markets",
+                crypto: "Crypto",
+                analytics: "Analysis",
+                heroTitle: "Global Financial Market",
+                heroSubtitle: "Real-time market data, currency exchange rates, and professional analysis",
+                liveData: "LIVE DATA",
+                mainIndexes: "Main Indices",
+                sp500: "S&P 500",
+                nasdaq: "NASDAQ",
+                gold: "Gold",
+                oil: "Oil",
+                backHome: "← Back to Home",
+                latestNews: "🔥 Latest Market News",
+                readMore: "Read More",
+                globalMarkets: "🌎 Global Financial Markets",
+                marketName: "Market",
+                index: "Index",
+                value: "Value",
+                change: "Change (24h)",
+                cryptoMarket: "💰 Cryptocurrency Market",
+                expertAnalysis: "🧠 Expert Analysis and Forecasts",
+                usdAnalysisTitle: "USD/UZS Analysis",
+                usdAnalysisText: "The US dollar maintains a stable upward trend against the Soum. Central bank interventions are limiting volatility.",
+                usdAnalysisPoints: [
+                    "Forecast: Expected to stabilize within the range of 12,800 - 12,950 Soum.",
+                    "Risks: Increased global geopolitical tensions."
+                ],
+                cryptoOutlookTitle: "Future Outlook for Crypto Markets",
+                cryptoOutlookText: "Bitcoin's recent rally positively impacted the market, but caution remains in altcoins.",
+                cryptoOutlookPoints: [
+                    "Support: $68,000 for BTC, $3,700 for ETH.",
+                    "Resistance: $75,000 for BTC."
+                ],
+                footerQuickLinks: "Quick Links",
+                footerContact: "Contact",
+                footerEmail: "Email: info@globalmarket.com",
+                footerPhone: "Phone: +998 71 123 45 67",
+                footerLegal: "Legal Information",
+                footerTerms: "Terms of Use",
+                footerPrivacy: "Privacy Policy",
+                footerDisclaimer: "Disclaimer",
+                copyrightText: "© 2025 Global Market Analysis. All rights reserved."
+            }
+        };
+
+        let currentLang = document.documentElement.lang;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pageContents = document.querySelectorAll('.page-content');
+            const themeToggle = document.getElementById('themeToggle');
+            const langToggle = document.getElementById('langToggle');
+
+            // --- 1. SAHIFALARNI BOSHQARISH FUNKSIYASI (ASOSIY MUAMMO YECHIMI) ---
+            function switchPage(pageId) {
+                // Hamma sahifani yashirish
+                pageContents.forEach(page => {
+                    page.classList.add('hidden');
+                });
+                
+                // Kerakli sahifani ko'rsatish
+                const targetPage = document.getElementById(pageId);
+                if (targetPage) {
+                    targetPage.classList.remove('hidden');
+                }
+
+                // Navigatsiya aktiv sinfini yangilash
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                });
+                const activeLink = document.querySelector(`.nav-link[data-page="${pageId.replace('Page', '')}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+            }
+            
+            // Linklarga hodisa qo'shish (Navbar, Footer va Bosh sahifaga qaytish)
+            document.querySelectorAll('.nav-link, .back-to-home, .footer-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const pageName = e.currentTarget.dataset.page;
+                    switchPage(pageName + 'Page');
+                });
+            });
+
+            // Sayt birinchi yuklanganda 'homePage'ni ko'rsatish
+            switchPage('homePage');
+
+            // --- 2. THEME (Mavzu) almashtirish ---
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                themeToggle.textContent = newTheme === 'dark' ? '🌙' : '☀️';
+            });
+
+            // --- 3. TILNI ALMASHTIRISH (Internationalization - i18n) ---
+            function updateTranslations(lang) {
+                const dictionary = translations[lang];
+                if (!dictionary) return;
+
+                // Matnlarni yangilash
+                document.querySelectorAll('[data-translate-key]').forEach(element => {
+                    const key = element.getAttribute('data-translate-key');
+                    if (dictionary[key] && !Array.isArray(dictionary[key])) {
+                        element.textContent = dictionary[key];
+                    }
+                });
+
+                // Tahlil sahifasidagi List (ul) elementlarini yangilash
+                const usdPointsContainer = document.querySelector('[data-translate-key="usdAnalysisPoints"]');
+                if (usdPointsContainer) {
+                    usdPointsContainer.innerHTML = dictionary.usdAnalysisPoints.map(item => `<li>${item}</li>`).join('');
+                }
+                const cryptoPointsContainer = document.querySelector('[data-translate-key="cryptoOutlookPoints"]');
+                if (cryptoPointsContainer) {
+                    cryptoPointsContainer.innerHTML = dictionary.cryptoOutlookPoints.map(item => `<li>${item}</li>`).join('');
+                }
+
+                document.documentElement.lang = lang;
+                langToggle.textContent = lang.toUpperCase();
+            }
+
+            langToggle.addEventListener('click', () => {
+                currentLang = currentLang === 'uz' ? 'en' : 'uz';
+                updateTranslations(currentLang);
+            });
+
+            // Boshlang'ich tilni yuklash
+            updateTranslations(currentLang);
+
+        });
+    </script>
+</body>
+</html>
